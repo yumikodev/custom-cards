@@ -26,7 +26,8 @@
   },
   "homepage": "https://github.com/Yumiko0828/custom-cards#readme",
   "dependencies": {
-    "canvas": "2.10.1"
+    "canvas": "2.10.1",
+    "yutil.js": "1.0.4"
   },
   "devDependencies": {
     "@types/node": "18.8.3",

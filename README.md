@@ -32,7 +32,7 @@ Los métodos disponibles al importar el módulo.
 
 | Metodo    | Typo         | Devuelve |
 | --------- | ------------ | -------- |
-| _Welcome_ | _`Class`_    | `Card`   |
+| _Welcome_ | _`Class`_    | `Welcome`   |
 | _render_  | _`Function`_ | `Buffer` |
 
 ### Clase `Welcome`:
@@ -83,7 +83,7 @@ El uso de la función `render` (teoría).
 | ------------------- | --------- | ------------------------------------ |
 | _options_           | `Object`  | Las opciones de la función `render`. |
 | _options#type_      | `String`  | El tipo de la tarjeta.               |
-| _options#structure_ | `Welcome` | La estructura de la tarjeta          |
+| _options#model_ | `Welcome` | El modelo de la tarjeta          |
 
 #### Ejemplo de uso:
 
@@ -92,7 +92,7 @@ El uso de la función `render` (teoría).
   try {
     let buffer = await CustomCard.render({
       type: "welcome", // El tipo de tarjeta.
-      model: card, // El modelo/molde de la tarjeta.
+      model: card, // El modelo de la tarjeta.
     });
 
     console.log(buffer); // El buffer de la tarjeta.
