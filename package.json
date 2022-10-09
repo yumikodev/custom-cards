@@ -1,0 +1,27 @@
+{
+  "name": "custom-cards",
+  "version": "1.0.0",
+  "description": "A simple card module with Canvas.",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc"
+  },
+  "keywords": [
+    "canvas",
+    "custom",
+    "cards",
+    "image"
+  ],
+  "engines": {
+    "node": "lts"
+  },
+  "author": "Yasu Yumiko",
+  "license": "MIT",
+  "dependencies": {
+    "canvas": "2.10.1"
+  },
+  "devDependencies": {
+    "@types/node": "18.8.3",
+    "typescript": "4.8.4"
+  }
+}
