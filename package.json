@@ -2,7 +2,11 @@
   "name": "custom-cards",
   "version": "1.0.0",
   "description": "A simple card module with Canvas.",
-  "main": "index.js",
+  "files": [
+    "lib/**/*"
+  ],
+  "main": "lib/index.js",
+  "types": "/lib/index.d.ts",
   "scripts": {
     "build": "tsc"
   },
@@ -17,6 +21,10 @@
   },
   "author": "Yasu Yumiko",
   "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Yumiko0828/custom-cards/issues"
+  },
+  "homepage": "https://github.com/Yumiko0828/custom-cards#readme",
   "dependencies": {
     "canvas": "2.10.1"
   },
