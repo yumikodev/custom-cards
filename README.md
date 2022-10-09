@@ -104,7 +104,7 @@ El uso de la función `render` (teoría).
 
 ## ✨ Detalles del proyecto:
 
-- Licencia: **MIT**
-- Author: **[Yasu Yumiko](https://discord.com/users/752918867273187378)**
+- Licencia: **[MIT License](https://github.com/Yumiko0828/custom-cards/blob/main/LICENSE.md)**
+- Autor: **[Yasu Yumiko](https://discord.com/users/752918867273187378)**
 
 ### Gracias :D
