@@ -1,5 +1,6 @@
-import Welcome from "./components/Welcome";
-import Level from "./components/Level";
-import render from "./components/render";
+import Welcome from "./dist/Welcome";
+import Level from "./dist/Level";
+import render from "./dist/render";
+import { Colors } from "./components/enums";
 
-export { Welcome, Level, render };
+export { Welcome, Level, render, Colors };

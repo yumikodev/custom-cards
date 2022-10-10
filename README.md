@@ -2,6 +2,9 @@
 
 Un simple módulo de manipulación de imágenes con Canvas, escrito en TypeScript.
 
+[![Downloads](https://img.shields.io/npm/dt/custom-cards.svg?maxAge=3600)](https://www.npmjs.com/package/custom-cards)
+[![NPM Version](https://img.shields.io/npm/v/custom-cards.svg?maxAge=3600)](https://www.npmjs.com/package/custom-cards)
+
 ## 📦 Instalación
 
 ```
@@ -12,7 +15,7 @@ npm install custom-cards
 
 > Puede experimentar problemas al usar Node.js v18 debido a la dependencia `Canvas`, se recomienda usar la versión LTS de Node.js
 
-Importar modulo
+Importar módulo
 
 - ES6:
 
@@ -30,10 +33,10 @@ const CustomCards = require("custom-cards");
 
 Los métodos disponibles al importar el módulo.
 
-| Metodo    | Typo         | Devuelve |
-| --------- | ------------ | -------- |
-| _Welcome_ | _`Class`_    | `Welcome`   |
-| _render_  | _`Function`_ | `Buffer` |
+| Método    | Tipo         | Devuelve  |
+| --------- | ------------ | --------- |
+| _Welcome_ | _`Class`_    | `Welcome` |
+| _render_  | _`Function`_ | `Buffer`  |
 
 ### Clase `Welcome`:
 
@@ -79,11 +82,11 @@ El uso de la función `render` (teoría).
 
 > La función `render` es asíncrona, por lo que tendra que usar _`Promesas`_ o _`async / await`_.
 
-| Parametros          | Tipo      | Descripción                          |
-| ------------------- | --------- | ------------------------------------ |
-| _options_           | `Object`  | Las opciones de la función `render`. |
-| _options#type_      | `String`  | El tipo de la tarjeta.               |
-| _options#model_ | `Welcome` | El modelo de la tarjeta          |
+| Parametros      | Tipo      | Descripción                          |
+| --------------- | --------- | ------------------------------------ |
+| _options_       | `Object`  | Las opciones de la función `render`. |
+| _options#type_  | `String`  | El tipo de la tarjeta.               |
+| _options#model_ | `Welcome` | El modelo de la tarjeta              |
 
 #### Ejemplo de uso:
 

@@ -1,8 +1,9 @@
 import * as Canvas from "canvas";
 import { join } from "node:path";
-import Level from "../components/Level";
-import Welcome from "../components/Welcome";
+import Level from "../dist/Level";
+import Welcome from "../dist/Welcome";
 import { percent } from "yutil.js";
+import Error from "../utils/Error";
 
 // Functions
 function registerFont(fontName: string, family: string) {
@@ -71,8 +72,8 @@ async function CanvasCard(
           // Image Buffer
           const buffer = canvas.toBuffer();
           return buffer;
-        } catch (err) {
-          console.error(err);
+        } catch (err: any) {
+          throw new Error(err.message);
         }
       },
       level: async (model: Level) => {
@@ -81,23 +82,28 @@ async function CanvasCard(
           const canvas = Canvas.createCanvas(1024, 300),
             ctx = canvas.getContext("2d");
 
-          let bar_width = 650,
-            reqXp = 100,
-            xp = 34,
-            avatar = await Canvas.loadImage(model.avatar);
+          let bar_width = 600,
+            avatar = await Canvas.loadImage(model.avatarOptions.url),
+            xpPercent = parseInt(
+              percent(
+                model.xpLevelOptions.minXP,
+                model.xpLevelOptions.maxXP,
+                1
+              ).replace("%", "")
+            );
 
           // Background
           if (model.background) {
-            let background = await Canvas.loadImage(model.background);
+            let background = await Canvas.loadImage(model.background.data);
 
             ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
           }
 
           // Avatar Circle
-          ctx.fillStyle = `#${model.circleColor}`;
+          ctx.fillStyle = model.avatarOptions.circleColor;
           ctx.textAlign = "center";
           ctx.beginPath();
-          ctx.arc(120, 120, 110, 0, Math.PI * 2, true);
+          ctx.arc(150, 150, 110, 0, Math.PI * 2, true);
           ctx.stroke();
           ctx.fill();
 
@@ -105,73 +111,60 @@ async function CanvasCard(
           (ctx.lineJoin = "round"), (ctx.lineWidth = 50);
 
           // Empty bar
-          ctx.strokeStyle = "#000";
-          ctx.strokeRect(300, 250, bar_width, 0);
+          ctx.strokeStyle = model.xpLevelOptions.emptyBarColor;
+          ctx.strokeRect(340, 250, bar_width, 0);
 
           // Filled bar
-          ctx.strokeStyle = model.xpBarOptions.filledBarStyle;
-          ctx.strokeRect(
-            300,
-            250,
-            (model.xpBarOptions.minXP * xp) / model.xpBarOptions.maxXP,
-            0
-          );
+          ctx.strokeStyle = model.xpLevelOptions.filledBarColor;
+          ctx.strokeRect(340, 250, xpPercent, 0);
 
           // Username
           ctx.font = `40px "${model.fontFamily}"`;
-          ctx.shadowColor = "black";
-          ctx.shadowBlur = 7;
-          ctx.lineWidth = 2;
-          ctx.fillStyle = `#${model.textStyle}`;
+          ctx.shadowColor = model.textOptions.shadowColor;
+          ctx.shadowBlur = 8;
+          ctx.lineWidth = 3;
+          ctx.fillStyle = model.textOptions.usernameColor;
           ctx.textAlign = "center";
-          ctx.fillText(model.textOptions.username, 120, 275, 200);
+          ctx.fillText(model.textOptions.username, 485, 150, 400);
 
           // Rank
-          ctx.fillStyle = `#${model.textOptions.rankStyle}`;
-          ctx.fillText(`#${model.xpBarOptions.rank}`, 740, 44, 80);
+          ctx.fillStyle = model.textOptions.rankColor;
+          ctx.fillText(`#${model.xpLevelOptions.rank}`, 740, 44, 80);
           // Level
-          ctx.fillStyle = `#${model.textOptions.levelStyle}`;
-          ctx.fillText(`${model.xpBarOptions.level}`, 930, 44, 80);
+          ctx.fillStyle = model.textOptions.levelColor;
+          ctx.fillText(`${model.xpLevelOptions.level}`, 930, 44, 80);
 
           // Rank & Level text
           ctx.font = `25px "${model.fontFamily}"`;
-          ctx.fillStyle = `#${model.textOptions.rankStyle}`;
+          ctx.fillStyle = model.textOptions.rankColor;
           ctx.fillText(model.textOptions.rankName, 650, 44, 200);
-          ctx.fillStyle = `#${model.textOptions.levelStyle}`;
+          ctx.fillStyle = model.textOptions.levelColor;
           ctx.fillText(model.textOptions.levelName, 840, 44, 200);
 
           // XP level
-          ctx.fillStyle = "#fff";
+          ctx.fillStyle = model.xpLevelOptions.XPLevelColor;
           ctx.font = `25px "${model.fontFamily}"`;
           ctx.fillText(
-            `${model.xpBarOptions.minXP}/${model.xpBarOptions.maxXP} XP`,
+            `${model.xpLevelOptions.minXP}/${model.xpLevelOptions.maxXP} XP`,
             880,
-            200
+            210
           );
-          ctx.fillText(
-            `${percent(
-              model.xpBarOptions.minXP,
-              model.xpBarOptions.maxXP,
-              1
-            ).replace("%", "")} / 100%`,
-            340,
-            200
-          );
+          ctx.fillText(`${xpPercent} / 100%`, 380, 210);
 
           // Rounded Avatar Corners
           ctx.beginPath();
-          ctx.arc(120, 120, 100, 0, Math.PI * 2, true);
+          ctx.arc(150, 150, 100, 0, Math.PI * 2, true);
           ctx.closePath();
           ctx.clip();
 
           // Avatar
-          ctx.drawImage(avatar, 20, 20, 200, 200);
+          ctx.drawImage(avatar, 50, 50, 200, 200);
 
           // Card Buffer
           const buffer = canvas.toBuffer();
           return buffer;
-        } catch (err) {
-          console.error(err);
+        } catch (err: any) {
+          throw new Error(err.message);
         }
       },
     };
@@ -179,7 +172,7 @@ async function CanvasCard(
     const card = await cardTypes[type](model);
     return card;
   } catch (err: any) {
-    console.error(err);
+    throw new Error(err.message);
   }
 }
 
