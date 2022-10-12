@@ -1,9 +1,10 @@
 {
   "name": "custom-cards",
-  "version": "1.5.0",
+  "version": "1.5.1",
   "description": "A simple card module with Canvas.",
   "files": [
     "lib/**/*",
+    "fonts/*",
     "docs/*"
   ],
   "main": "lib/index.js",
