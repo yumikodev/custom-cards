@@ -1,8 +1,5 @@
-/**
- * @enum
- */
 export enum Colors {
-  Black = 1,
+  Black,
   White,
   Gray,
   Grey,
@@ -10,7 +7,9 @@ export enum Colors {
   Orange,
   Yellow,
   Green,
+  Aqua,
   Blue,
   Pink,
   Purple,
+  Brown,
 }

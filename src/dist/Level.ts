@@ -1,19 +1,7 @@
+import { Color } from "../components/ColorObject";
 import { Colors } from "../components/enums";
 import Error from "../utils/Error";
 
-const Color = {
-  1: "black",
-  2: "white",
-  3: "gray",
-  4: "grey",
-  5: "red",
-  6: "orange",
-  7: "yellow",
-  8: "green",
-  9: "blue",
-  10: "pink",
-  11: "purple",
-};
 type imageTypes = {
   url: string;
   buffer: Buffer;
@@ -24,9 +12,25 @@ export default class {
     this.fontFamily = options.fontFamily;
   }
 
-  setAvatarOptions(options: { url: string; circleColor: Colors | string }) {
+  setAvatar<T extends keyof imageTypes>(options: {
+    type: T;
+    data: imageTypes[T];
+    circleColor: Colors | string;
+  }) {
+    if (!options) throw new Error("the 'options' parameter is required");
+
     if (typeof options.circleColor === "number")
       options.circleColor = Color[options.circleColor];
+    if (typeof options.data === "string" && options.type === "buffer")
+      throw new Error("'data' is not a buffer");
+    if (
+      options.type === "url" &&
+      typeof options.data === "string" &&
+      !options.data.startsWith("https://")
+    )
+      throw new Error(
+        "invalid url address, only https protocol is allowed (https://)"
+      );
 
     this.avatarOptions = options;
     return this;
@@ -36,58 +40,87 @@ export default class {
     type: T;
     data: imageTypes[T];
   }) {
+    if (!options) throw new Error("the 'options' parameter is required");
+
     if (typeof options.data === "string" && options.type === "buffer")
       throw new Error("'data' is not a buffer");
+    if (
+      options.type === "url" &&
+      typeof options.data === "string" &&
+      !options.data.startsWith("https://")
+    )
+      throw new Error(
+        "invalid url address, only https protocol is allowed (https://)"
+      );
 
     this.background = options;
     return this;
   }
   background: any;
-  setTextOptions(options: {
-    username: string;
-    usernameColor: Colors | string;
-    rankName?: string;
-    levelName?: string;
-    rankColor: Colors | string;
-    levelColor: Colors | string;
-    shadowColor: "black" | "white";
+  setText(options: {
+    user: {
+      name: string;
+      color: Colors | string;
+      shadowColor: Colors | string;
+    };
+    rank: {
+      name?: string;
+      color: Colors | string;
+      shadowColor: Colors | string;
+    };
+    level: {
+      name?: string;
+      color: Colors | string;
+      shadowColor: Colors | string;
+    };
   }) {
+    if (!options) throw new Error("the 'options' parameter is required");
+
     // Default Level & Rank Name
-    if (!options.levelName) options.levelName = "Level";
-    if (!options.rankName) options.rankName = "Rank";
+    if (!options.level.name) options.level.name = "Level";
+    if (!options.rank.name) options.rank.name = "Rank";
 
     // Enums
-    if (typeof options.usernameColor === "number")
-      options.usernameColor = Color[options.usernameColor];
-    if (typeof options.rankColor === "number")
-      options.rankColor = Color[options.rankColor];
-    if (typeof options.levelColor === "number")
-      options.levelColor = Color[options.levelColor];
+    if (typeof options.user.color === "number")
+      options.user.color = Color[options.user.color];
+    if (typeof options.user.shadowColor === "number")
+      options.user.shadowColor = Color[options.user.shadowColor];
+    if (typeof options.rank.color === "number")
+      options.rank.color = Color[options.rank.color];
+    if (typeof options.rank.shadowColor === "number")
+      options.rank.shadowColor = Color[options.rank.shadowColor];
+    if (typeof options.level.color === "number")
+      options.level.color = Color[options.level.color];
+    if (typeof options.level.shadowColor === "number")
+      options.level.shadowColor = Color[options.level.shadowColor];
 
-    // Valid Shadow Color
-    if (options.shadowColor === "black" || options.shadowColor === "white") {
-      this.textOptions = options;
-      return this;
-    } else {
-      throw new Error("shadowColor is invalid");
-    }
+    this.textOptions = options;
+    return this;
   }
   textOptions: any;
-  setXPLevelOptions(options: {
-    emptyBarColor: Colors | string;
-    filledBarColor: Colors | string;
+  setXPLevel(options: {
+    barColor: {
+      empty: Colors | string;
+      filled: Colors | string;
+      shadowColor: Colors | string;
+    };
     rank: string | number;
     level: string | number;
-    minXP: string | number;
-    maxXP: string | number;
-    XPLevelColor: Colors | string;
+    xp: {
+      current: string | number;
+      max: string | number;
+      levelColor: Colors | string;
+    };
   }) {
-    if (typeof options.XPLevelColor === "number")
-      options.XPLevelColor = Color[options.XPLevelColor];
-    if (typeof options.emptyBarColor === "number")
-      options.emptyBarColor = Color[options.emptyBarColor];
-    if (typeof options.filledBarColor === "number")
-      options.filledBarColor = Color[options.filledBarColor];
+    if (!options) throw new Error("the 'options' parameter is required");
+    if (typeof options.xp.levelColor === "number")
+      options.xp.levelColor = Color[options.xp.levelColor];
+    if (typeof options.barColor.empty === "number")
+      options.barColor.empty = Color[options.barColor.empty];
+    if (typeof options.barColor.filled === "number")
+      options.barColor.filled = Color[options.barColor.filled];
+    if (typeof options.barColor.shadowColor === "number")
+      options.barColor.shadowColor = Color[options.barColor.shadowColor];
 
     this.xpLevelOptions = options;
     return this;

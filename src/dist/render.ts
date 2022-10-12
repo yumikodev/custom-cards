@@ -3,18 +3,21 @@ import Error from "../utils/Error";
 import Level from "./Level";
 import Welcome from "./Welcome";
 
-export default async function (options: {
-  type: "welcome" | "level";
-  model: Welcome | Level | any;
+type renderType = {
+  welcome: Welcome;
+  level: Level;
+};
+
+export default async function <T extends keyof renderType>(options: {
+  type: T;
+  model: renderType[T];
 }) {
   try {
     const cardTypes = {
       welcome: async (model: Welcome) => {
-        if (!model.avatar) throw new Error("'avatar' is required");
-        if (!model.circleColor) throw new Error("'circleColor' is required");
+        if (!model.avatarOptions) throw new Error("'avatarOptions' is required");
         if (!model.fontFamily) throw new Error("'fontFamily' is required");
-        if (!model.title) throw new Error("'title' is required");
-        if (!model.titleColor) throw new Error("'titleColor' is required");
+        if (!model.textOptions) throw new Error("'textOptions' is required");
 
         try {
           let buffer = await CanvasCard("welcome", model);
@@ -41,9 +44,9 @@ export default async function (options: {
     };
 
     if (options.type === "welcome") {
-      return cardTypes[options.type](options.model);
+      return cardTypes["welcome"](<Welcome>options.model);
     } else if (options.type === "level") {
-      return cardTypes[options.type](options.model);
+      return cardTypes["level"](<Level>options.model);
     } else {
       throw new Error("invalid type");
     }
