@@ -186,7 +186,7 @@ const card = new CustomCards.Welcome({
 
 #### Resultado final:
 
-[![img](/docs/img1.png)](https://www.npmjs.com/package/custom-cards)
+[![img](https://raw.githubusercontent.com/Yumiko0828/custom-cards/main/docs/img1.png)](https://www.npmjs.com/package/custom-cards)
 
 ### Clase `Level`:
 
@@ -303,7 +303,7 @@ const card = new CustomCards.Level({
 
 #### Resultado final:
 
-[![img](/docs/img2.png)](https://www.npmjs.com/package/custom-cards)
+[![img](https://raw.githubusercontent.com/Yumiko0828/custom-cards/main/docs/img2.png)](https://www.npmjs.com/package/custom-cards)
 
 ### Función `render`:
 
@@ -463,7 +463,7 @@ const card = new CustomCards.Welcome({
 
 #### Result:
 
-[![img](/docs/img1.png)](https://www.npmjs.com/package/custom-cards)
+[![img](https://raw.githubusercontent.com/Yumiko0828/custom-cards/main/docs/img1.png)](https://www.npmjs.com/package/custom-cards)
 
 ### `Level` class:
 
@@ -580,7 +580,7 @@ const card = new CustomCards.Level({
 
 #### Result:
 
-[![img](/docs/img2.png)](https://www.npmjs.com/package/custom-cards)
+[![img](https://raw.githubusercontent.com/Yumiko0828/custom-cards/main/docs/img2.png)](https://www.npmjs.com/package/custom-cards)
 
 ### `render` function:
 
