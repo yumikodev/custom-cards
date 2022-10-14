@@ -31,7 +31,7 @@ export default async function (Canvas: typeof CanvasModule, model: Welcome) {
     ctx.shadowBlur = 8;
     ctx.lineWidth = 3;
     ctx.fillStyle = model.textOptions.title.color;
-    ctx.fillText(model.textOptions.title.content, 512, 370, 600);
+    ctx.fillText(model.textOptions.title.content, 512, 370, 700);
 
     // Description
     if (model.textOptions.description) {

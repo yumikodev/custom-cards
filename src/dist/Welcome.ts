@@ -8,7 +8,9 @@ type imageType = {
 };
 
 export default class {
-  constructor(options: { fontFamily: "FredokaOne" | "Capriola" | "Poppins" }) {
+  constructor(options: {
+    fontFamily: "FredokaOne" | "Capriola" | "Poppins" | "MilkyCoffee";
+  }) {
     this.fontFamily = options.fontFamily;
   }
   setText(options: {

@@ -1,14 +1,13 @@
 {
   "name": "custom-cards",
-  "version": "1.5.1",
+  "version": "1.5.2",
   "description": "A simple card module with Canvas.",
   "files": [
     "lib/**/*",
-    "fonts/*",
-    "docs/*"
+    "fonts/*"
   ],
   "main": "lib/index.js",
-  "types": "/lib/index.d.ts",
+  "types": "lib/index.d.ts",
   "scripts": {
     "build": "tsc"
   },

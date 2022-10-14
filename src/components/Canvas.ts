@@ -18,6 +18,7 @@ function registerFont(fontName: string, family: string) {
 registerFont("Capriola-Regular.ttf", "Capriola Regular");
 registerFont("FredokaOne-Regular.ttf", "FredokaOne Regular");
 registerFont("Poppins-Bold.ttf", "Poppins Bold");
+registerFont("MilkyCoffee.ttf", "Milky Coffee");
 
 type canvasCardType = {
   welcome: Welcome;
