@@ -11,12 +11,10 @@ export default async function (Canvas: typeof CanvasModule, model: Level) {
 
     let bar_width = 600,
       avatar = await Canvas.loadImage(model.avatarOptions.data),
-      xpPercent = parseInt(
-        percent(
-          model.xpLevelOptions.xp.current,
-          model.xpLevelOptions.xp.max,
-          1
-        ).replace("%", "")
+      xpPercent = percent(
+        model.xpLevelOptions.xp.current,
+        model.xpLevelOptions.xp.max,
+        1
       );
 
     // Background
