@@ -1,5 +1,5 @@
 import * as CanvasModule from "canvas";
-import Welcome from "../dist/Welcome";
+import { Welcome } from "../classes/Welcome";
 import Error from "../utils/Error";
 
 export default async function (Canvas: typeof CanvasModule, model: Welcome) {

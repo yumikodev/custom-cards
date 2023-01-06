@@ -1,7 +1,7 @@
 import * as Canvas from "canvas";
 import { join } from "node:path";
-import Level from "../dist/Level";
-import Welcome from "../dist/Welcome";
+import { Level } from "../classes/Level";
+import { Welcome } from "../classes/Welcome";
 import Error from "../utils/Error";
 import welcome from "./welcome";
 import level from "./level";
@@ -20,14 +20,14 @@ registerFont("FredokaOne-Regular.ttf", "FredokaOne Regular");
 registerFont("Poppins-Bold.ttf", "Poppins Bold");
 registerFont("MilkyCoffee.ttf", "Milky Coffee");
 
-type canvasCardType = {
+type CanvasCardType = {
   welcome: Welcome;
   level: Level;
 };
 
-async function CanvasCard<T extends keyof canvasCardType>(
+async function CanvasCard<T extends keyof CanvasCardType>(
   type: T,
-  model: canvasCardType[T]
+  model: CanvasCardType[T]
 ) {
   try {
     const cardTypes = {

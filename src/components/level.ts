@@ -1,6 +1,6 @@
 import * as CanvasModule from "canvas";
 import { percent } from "yutil.js";
-import Level from "../dist/Level";
+import { Level } from "../classes/Level";
 import Error from "../utils/Error";
 
 export default async function (Canvas: typeof CanvasModule, model: Level) {

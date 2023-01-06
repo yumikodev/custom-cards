@@ -7,8 +7,8 @@ Un simple módulo de manipulación de imágenes con Canvas, escrito en TypeScrip
 
 - [**ESPAÑOL**](#spanish---español)
 
-  - [Instalación](#📦-instalación)
-  - [Uso](#❔-uso)
+  - [Instalación](#instalación)
+  - [Uso](#uso)
     - [Importar Módulo](#importar-módulo)
     - [Métodos](#métodos-de-custom-cards)
     - [Clase `Welcome`](#clase-welcome)
@@ -34,8 +34,8 @@ Un simple módulo de manipulación de imágenes con Canvas, escrito en TypeScrip
 
 - [**ENGLISH**](#english---inglés)
 
-  - [Installation](#📦-installation)
-  - [Use](#❔-use)
+  - [Installation](#installation)
+  - [Use](#use)
     - [Import module](#import-module)
     - [Methods](#custom-card-methods)
     - [`Welcome` class](#welcome-class)
@@ -59,25 +59,23 @@ Un simple módulo de manipulación de imágenes con Canvas, escrito en TypeScrip
       - [Parameters](#parameters-2)
       - [Usage example](#usage-example-2)
 
-- [**✨ Detalles del proyecto**](#✨-detalles-del-proyecto)
+- [**Detalles del proyecto**](#detalles-del-proyecto)
 
 ---
 
 ## Spanish - Español:
 
-## 📦 Instalación
+## Instalación
 
 ```
 npm install custom-cards
 ```
 
-## ❔ Uso
-
-> Puede experimentar problemas al usar Node.js v18 debido a la dependencia `Canvas`, se recomienda usar la versión LTS de Node.js
+## Uso
 
 ### Importar módulo
 
-- ES6:
+- ESM:
 
 ```js
 import * as CustomCards from "custom-cards";
@@ -342,13 +340,13 @@ El uso de la función `render` (teoría).
 
 ## English - Inglés
 
-## 📦 Installation
+## Installation
 
 ```
 npm install custom-cards
 ```
 
-## ❔ Use
+## Use
 
 > You may experience issues using Node.js v18 due to the `Canvas` dependency, it is recommended to use the LTS version of Node.js
 
@@ -617,7 +615,7 @@ The use of the `render` function (theory).
 
 ---
 
-## ✨ Detalles del proyecto:
+## Detalles del proyecto:
 
 - Licencia: **[MIT License](https://github.com/Yumiko0828/custom-cards/blob/main/LICENSE.md)**
 - Autor: **[Yasu Yumiko](https://discord.com/users/752918867273187378)**

@@ -7,7 +7,7 @@ type imageType = {
   buffer: Buffer;
 };
 
-export default class {
+export class Welcome {
   constructor(options: {
     fontFamily: "FredokaOne" | "Capriola" | "Poppins" | "MilkyCoffee";
   }) {

@@ -1,21 +1,22 @@
 import { CanvasCard } from "../components/Canvas";
 import Error from "../utils/Error";
-import Level from "./Level";
-import Welcome from "./Welcome";
+import { Level } from "../classes/Level";
+import { Welcome } from "../classes/Welcome";
 
 type renderType = {
   welcome: Welcome;
   level: Level;
 };
 
-export default async function <T extends keyof renderType>(options: {
+export async function render<T extends keyof renderType>(options: {
   type: T;
   model: renderType[T];
 }) {
   try {
     const cardTypes = {
       welcome: async (model: Welcome) => {
-        if (!model.avatarOptions) throw new Error("'avatarOptions' is required");
+        if (!model.avatarOptions)
+          throw new Error("'avatarOptions' is required");
         if (!model.fontFamily) throw new Error("'fontFamily' is required");
         if (!model.textOptions) throw new Error("'textOptions' is required");
 
