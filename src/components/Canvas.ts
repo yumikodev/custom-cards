@@ -1,45 +1,28 @@
-import * as Canvas from "canvas";
+import { CanvasRenderingContext2D, createCanvas } from "canvas";
+import { readdirSync } from "node:fs";
 import { join } from "node:path";
-import { Level } from "../classes/Level";
-import { Welcome } from "../classes/Welcome";
-import Error from "../utils/Error";
-import welcome from "./welcome";
-import level from "./level";
+import { registerFont } from "../utils/registerFont";
 
-// Functions
-function registerFont(fontName: string, family: string) {
-  Canvas.registerFont(join(__dirname, `../../fonts/${fontName}`), {
-    family,
-  });
-  return;
-}
+export class Canvas {
+  ctx: CanvasRenderingContext2D;
 
-// Register fonts
-registerFont("Capriola-Regular.ttf", "Capriola Regular");
-registerFont("FredokaOne-Regular.ttf", "FredokaOne Regular");
-registerFont("Poppins-Bold.ttf", "Poppins Bold");
-registerFont("MilkyCoffee.ttf", "Milky Coffee");
+  constructor(width: number, height: number) {
+    const canvas = createCanvas(width, height),
+      ctx = canvas.getContext("2d");
 
-type CanvasCardType = {
-  welcome: Welcome;
-  level: Level;
-};
+    const fonts = readdirSync(join(process.cwd(), "fonts"));
 
-async function CanvasCard<T extends keyof CanvasCardType>(
-  type: T,
-  model: CanvasCardType[T]
-) {
-  try {
-    const cardTypes = {
-      welcome: welcome,
-      level: level,
-    };
+    for (const font of fonts) {
+      registerFont(
+        font.split(".")[0].replace("-", " "),
+        join(process.cwd(), "fonts", font)
+      );
+    }
 
-    const card = await cardTypes[type](Canvas, <any>model);
-    return card;
-  } catch (err: any) {
-    throw new Error(err.message);
+    this.ctx = ctx;
+  }
+
+  get buffer(): Buffer {
+    return this.ctx.canvas.toBuffer();
   }
 }
-
-export { CanvasCard };
