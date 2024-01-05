@@ -98,7 +98,7 @@ const card = new CustomCards.Welcome()
 El uso de la función `render` (teoría).
 
 > [!NOTE]
-> La función `render` es asíncrona, por lo que tendra que usar _`Promesas`_ o _`async / await`_. |
+> La función `render` es asíncrona, por lo que tendra que usar _`Promesas`_ o _`async / await`_.
 
 - Ejemplo de uso:
 
