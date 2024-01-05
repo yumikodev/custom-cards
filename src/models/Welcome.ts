@@ -75,7 +75,7 @@ export class Welcome {
             color,
             content,
             font: model.font,
-            size: i === 0 ? "80px" : i === 1 ? "60px" : "35px",
+            size: i === 0 ? "80px" : i === 1 ? "60px" : "40px",
             x: width / 2,
             y: height / h,
             maxWidth: (width * 90) / 100,

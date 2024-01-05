@@ -1,6 +1,6 @@
 {
   "name": "custom-cards",
-  "version": "1.5.4",
+  "version": "1.5.5",
   "description": "A simple card module with Canvas.",
   "files": [
     "lib/**/*",
@@ -27,6 +27,7 @@
   "homepage": "https://github.com/Yumiko0828/custom-cards#readme",
   "dependencies": {
     "canvas": "2.11.2",
+    "sharp": "0.33.1",
     "yutil.js": "1.0.5"
   },
   "devDependencies": {
