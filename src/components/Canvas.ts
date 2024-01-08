@@ -10,12 +10,12 @@ export class Canvas {
     const canvas = createCanvas(width, height),
       ctx = canvas.getContext("2d");
 
-    const fonts = readdirSync(join(process.cwd(), "fonts"));
+    const fonts = readdirSync(join(__dirname, "../../fonts"));
 
     for (const font of fonts) {
       registerFont(
         font.split(".")[0].replace("-", " "),
-        join(process.cwd(), "fonts", font)
+        join(__dirname, "../../fonts", font)
       );
     }
 
