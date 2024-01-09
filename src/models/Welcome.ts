@@ -64,7 +64,7 @@ export class Welcome {
     try {
       const width = 1280,
         height = 720,
-        { ctx } = new Canvas(width, height);
+        { ctx, canvas } = new Canvas(width, height);
 
       const text: DrawTextOptions[] = model.text.map(
         ({ color, content }, i) => {
@@ -112,7 +112,7 @@ export class Welcome {
         y: height / 3.1,
       });
 
-      return ctx.canvas.toBuffer();
+      return canvas.toBuffer();
     } catch (e) {
       throw new CustomCardsError(e);
     }

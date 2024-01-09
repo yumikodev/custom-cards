@@ -5,6 +5,7 @@ import { registerFont } from "../utils/registerFont";
 
 export class Canvas {
   ctx: CanvasRenderingContext2D;
+  canvas;
 
   constructor(width: number, height: number) {
     const canvas = createCanvas(width, height),
@@ -20,9 +21,6 @@ export class Canvas {
     }
 
     this.ctx = ctx;
-  }
-
-  get buffer(): Buffer {
-    return this.ctx.canvas.toBuffer();
+    this.canvas = canvas;
   }
 }
