@@ -75,7 +75,7 @@ const card = new CustomCards.Welcome()
     frameColor: "#ff7eae",
     frameType: "square",
   })
-  .setImage("https://cdn.nekos.life/wallpaper/cGsBtWbjaGs.jpg")
+  .setBackground("https://cdn.nekos.life/wallpaper/cGsBtWbjaGs.jpg")
   .setText([
     {
       content: "Bienvenid@ usuario",
@@ -86,7 +86,7 @@ const card = new CustomCards.Welcome()
       color: "#eee",
     },
   ])
-  .setFont(Fonts.Fredoka);
+  .setFont(CustomCards.Fonts.Fredoka);
 ```
 
 #### Ejemplo:

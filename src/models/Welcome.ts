@@ -1,20 +1,13 @@
-import { Canvas } from "../components/Canvas";
-import {
-  drawCircleAvatarFrame,
-  drawSquareAvatarFrame,
-} from "../components/drawAvatarFrame";
-import { drawAvatarImage } from "../components/drawAvatarImage";
-import { drawBackground } from "../components/drawBackground";
-import { drawText } from "../components/drawText";
-import { DrawTextOptions } from "../types/components";
+import api from "../providers/axios";
 import { AvatarOptions, Fonts, Source, TextOptions } from "../types/models";
+import { welcomeCard } from "../utils/api";
 import { CustomCardsError } from "../utils/error";
 
 export class Welcome {
-  text!: TextOptions[];
-  avatar!: AvatarOptions;
-  image!: Source;
-  font!: string;
+  text?: TextOptions[];
+  avatar: AvatarOptions;
+  background?: Source;
+  font: Fonts;
 
   /**
    * Set the text for the card.
@@ -22,10 +15,7 @@ export class Welcome {
    * Max 3 indexes.
    */
   setText(data: TextOptions[]) {
-    if (data.length > 3)
-      throw new CustomCardsError(
-        `The max of indexes was exceeded. (Max 3, but there are ${data.length})`
-      );
+    if (data.length > 3) data.length = 3;
 
     this.text = data;
     return this;
@@ -42,15 +32,15 @@ export class Welcome {
   /**
    * Set the background image.
    */
-  setImage(src: Source) {
-    this.image = src;
+  setBackground(src: Source) {
+    this.background = src;
     return this;
   }
 
   /**
    * Set the font family.
    */
-  setFont(fontName: Fonts | string) {
+  setFont(fontName: Fonts) {
     this.font = fontName;
     return this;
   }
@@ -58,63 +48,29 @@ export class Welcome {
   static async render(
     model: Pick<
       InstanceType<typeof Welcome>,
-      "avatar" | "font" | "image" | "text"
+      "avatar" | "font" | "background" | "text"
     >
   ): Promise<Buffer> {
+    const { avatar, font, background, text } = model;
+
+    const query = new URLSearchParams({
+      avatarURL: avatar.src,
+      avatarFrame: avatar.frameType,
+      avatarFrameColor: avatar.frameColor,
+      font,
+    });
+
+    if (background) query.append("background", background);
+    if (text) query.append("text", JSON.stringify(text));
+
     try {
-      const width = 1280,
-        height = 720,
-        { ctx, canvas } = new Canvas(width, height);
+      const {
+        data: { data },
+      } = await api.get(welcomeCard(query.toString()));
 
-      const text: DrawTextOptions[] = model.text.map(
-        ({ color, content }, i) => {
-          let h = i === 0 ? 1.5 : i === 1 ? 1.32 : 1.2;
-
-          return {
-            align: "center",
-            color,
-            content,
-            font: model.font,
-            size: i === 0 ? "80px" : i === 1 ? "60px" : "40px",
-            x: width / 2,
-            y: height / h,
-            maxWidth: (width * 90) / 100,
-          };
-        }
-      );
-
-      await drawBackground(ctx, model.image);
-      drawText(ctx, text);
-
-      // Avatar & Frame
-      if (model.avatar.frameType === "circle") {
-        drawCircleAvatarFrame(ctx, {
-          color: model.avatar.frameColor,
-          x: width / 2,
-          y: height / 3.1,
-          radius: 150,
-        });
-      } else {
-        drawSquareAvatarFrame(ctx, {
-          color: model.avatar.frameColor,
-          width: 300,
-          height: 300,
-          x: width / 2,
-          y: height / 3.1,
-        });
-      }
-      await drawAvatarImage(ctx, {
-        src: model.avatar.src,
-        type: model.avatar.frameType,
-        width: 300,
-        height: 300,
-        x: width / 2,
-        y: height / 3.1,
-      });
-
-      return canvas.toBuffer();
+      return Buffer.from(data);
     } catch (e) {
-      throw new CustomCardsError(e);
+      throw new CustomCardsError(e.message);
     }
   }
 }

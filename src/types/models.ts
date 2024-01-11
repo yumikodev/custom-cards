@@ -1,11 +1,9 @@
-import { FrameType } from "./components";
-
 export type HexColor = `#${string}`;
-export type Source = `https://${string}` | `http://${string}` | Buffer;
+export type Source = `https://${string}` | `http://${string}`;
+export type FrameType = "circle" | "square";
 
 export enum Fonts {
   Fredoka = "FredokaOne",
-  Capriola = "Capriola",
   Poppins = "Poppins",
   MilkyCoffee = "MilkyCoffee",
 }

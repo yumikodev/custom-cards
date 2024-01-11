@@ -1,6 +1,6 @@
 {
   "name": "custom-cards",
-  "version": "1.5.7",
+  "version": "1.5.8",
   "description": "A simple card module with Canvas.",
   "files": [
     "lib/**/*",
@@ -16,8 +16,7 @@
     "custom",
     "cards",
     "image",
-    "welcome",
-    "levels"
+    "welcome"
   ],
   "author": "Yasu Yumiko",
   "license": "MIT",
@@ -25,12 +24,11 @@
     "url": "https://github.com/Yumiko0828/custom-cards/issues"
   },
   "homepage": "https://github.com/Yumiko0828/custom-cards#readme",
-  "dependencies": {
-    "canvas": "2.10.2",
-    "sharp": "0.33.1"
-  },
   "devDependencies": {
-    "@types/node": "20.10.6",
     "typescript": "5.3.3"
+  },
+  "dependencies": {
+    "@types/node": "20.11.0",
+    "axios": "1.6.5"
   }
 }
