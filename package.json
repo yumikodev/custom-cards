@@ -1,6 +1,6 @@
 {
   "name": "custom-cards",
-  "version": "1.5.8",
+  "version": "1.5.9",
   "description": "A simple card module with Canvas.",
   "files": [
     "lib/**/*",
