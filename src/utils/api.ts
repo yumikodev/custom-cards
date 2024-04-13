@@ -1,3 +1,3 @@
-export const baseURL = "https://api-custom-cards.onrender.com";
-export const v1 = `/v1`;
-export const welcomeCard = (query: string) => `${v1}/cards/welcome?${query}`;
+export const baseURL = "https://api-custom-cards.onrender.com/";
+export const version = `v1`;
+export const welcomeCard = `${version}/cards/welcome`;

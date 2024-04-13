@@ -53,22 +53,20 @@ export class Welcome {
   ): Promise<Buffer> {
     const { avatar, font, background, text } = model;
 
-    const query = new URLSearchParams({
+    const body: Record<string, any> = {
       avatarURL: avatar.src,
       avatarFrame: avatar.frameType,
       avatarFrameColor: avatar.frameColor,
       font,
-    });
+    };
 
-    if (background) query.append("background", background);
-    if (text) query.append("text", JSON.stringify(text));
+    if (background) body.background = background;
+    if (text) body.text = text;
 
     try {
-      const {
-        data: { data },
-      } = await api.get(welcomeCard(query.toString()));
+      const { data } = await api.post(welcomeCard, body);
 
-      return Buffer.from(data);
+      return Buffer.from(data.card);
     } catch (e) {
       throw new CustomCardsError(e.message);
     }
