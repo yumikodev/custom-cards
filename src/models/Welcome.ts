@@ -65,7 +65,6 @@ export class Welcome {
 
     try {
       const { data } = await api.post(welcomeCard, body);
-
       return Buffer.from(data.card);
     } catch (e) {
       throw new CustomCardsError(e.message);

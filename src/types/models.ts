@@ -3,9 +3,9 @@ export type Source = `https://${string}` | `http://${string}`;
 export type FrameType = "circle" | "square";
 
 export enum Fonts {
-  Fredoka = "FredokaOne",
+  Fredoka = "Fredoka One",
   Poppins = "Poppins",
-  MilkyCoffee = "MilkyCoffee",
+  MilkyCoffee = "Milky Coffee",
 }
 
 export interface TextOptions {
