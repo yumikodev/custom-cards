@@ -1,27 +1,29 @@
 import axios, { AxiosError } from "axios";
-import { baseURL } from "../utils/api";
+import { baseURL } from "../utils/endpoints.js";
 
-const api = axios.create({
-  baseURL: baseURL,
-  headers: {
-    "Content-Type": "application/json",
-  },
-});
+export function createHttpClient(token: string) {
+  const api = axios.create({
+    baseURL: baseURL,
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
 
-api.interceptors.request.use(
-  (config) => config,
-  (err) => Promise.reject(err)
-);
+  api.interceptors.request.use(
+    (config) => config,
+    (err) => Promise.reject(err)
+  );
 
-api.interceptors.response.use(
-  (res) => res,
-  (err: AxiosError) => {
-    if (err.response) {
-      return Promise.reject(err.response.data);
+  api.interceptors.response.use(
+    (res) => res,
+    (err: AxiosError) => {
+      if (err.response) {
+        return Promise.reject(err.response.data);
+      }
+
+      return Promise.reject(err);
     }
+  );
 
-    return Promise.reject(err);
-  }
-);
-
-export default api;
+  return api;
+}

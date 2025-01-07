@@ -1,13 +1,13 @@
 {
   "compilerOptions": {
-    "target": "ES5",
-    "module": "CommonJS",
+    "target": "ES2015",
+    "module": "NodeNext",
     "declaration": true,
     "outDir": "./lib",
     "strict": true,
+    "moduleResolution": "nodenext",
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "resolveJsonModule": true,
     "useUnknownInCatchVariables": false,
     "strictPropertyInitialization": false
   },
