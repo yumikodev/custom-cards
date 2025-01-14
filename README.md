@@ -9,14 +9,8 @@ Un simple módulo de manipulación de imágenes con Canvas, escrito en TypeScrip
 
 - [Instalación](#instalación)
 - [Importar Módulo](#importar-módulo)
-- [Tarjetas](#tarjetas)
-- Métodos
-  - [Estáticos](#métodos-estáticos)
-  - [Extras](#métodos-extras)
-- [Clase `Welcome`](#clase-welcome)
-- [Función `render`](#función-render)
-
-- [**Detalles del proyecto**](#detalles-del-proyecto)
+- [Uso básico](#uso-básico)
+- [Detalles del proyecto](#detalles-del-proyecto)
 
 ## Instalación
 
@@ -28,55 +22,37 @@ npm install custom-cards
 
 ### Importar módulo
 
-- ESM:
+> A partir de la versión 1.6.0 el módulo pasó a ser un ESM, por lo que usarlo con CommonJs puede llegar a dar problemas inesperados.
 
 ```js
 import * as CustomCards from "custom-cards";
 ```
 
-- CommonJS:
+### Uso básico
 
 ```js
-const CustomCards = require("custom-cards");
-```
+import { readFileSync } from "node:fs";
 
-### Tarjetas:
+// Leemos una imágen local
+const wpBuf = readFileSync("./wallpaper.jpg");
 
-Los métodos disponibles al importar el módulo.
+// Inicializamos el cliente (reemplazamos TOKEN por nuestro token)
+const client = new CustomCards.Setup("TOKEN");
 
-| Tarjeta   | Tipo      |
-| --------- | --------- |
-| _Welcome_ | _`Class`_ |
-
-### Métodos estáticos:
-
-- [`<card>.render()`](#función-render)
-
-### Métodos extras:
-
-| Método       | Tipo       | Descripción                                |
-| ------------ | ---------- | ------------------------------------------ |
-| registerFont | `Function` | Registra tus propias fuentes tipográficas. |
-| Fonts        | `Enum`     | Enumerado con las fuentes por defecto.     |
-
-### Clase `Welcome`:
-
-| Método                   | Tipo                     | Descripción                                  |
-| ------------------------ | ------------------------ | -------------------------------------------- |
-| _setAvatar(**options**)_ | options: `AvatarOptions` | Establece el avatar de la tarjeta.           |
-| _setImage(**src**)_      | src: `Source`            | Establece la imágen de fondo. **(opcional)** |
-| _setFont(**font**)_      | font: `Fonts \| string`  | Establece la fuente tipográfica.             |
-| _setText(**options**)_   | options: `TextOptions[]` | Establece el texto de la tarjeta.            |
-
-```js
-const card = new CustomCards.Welcome()
-  .setAvatar({
-    src: "https://yumikodev.vercel.app/avatar.webp",
+// Creamos el modelo de nuestra tarjeta
+const card = new CustomCards.WelcomeCard({
+  variant: "Classic",
+  avatar: {
+    // usamos "imageUrlAdapter" para usar imágenes desde una URL
+    source: await CustomCards.imageUrlAdapter(
+      "https://yumikodev.vercel.app/avatar.webp"
+    ),
     frameColor: "#ff7eae",
-    frameType: "square",
-  })
-  .setBackground("https://cdn.nekos.life/wallpaper/cGsBtWbjaGs.jpg")
-  .setText([
+    frameType: CustomCards.FrameType.Square,
+  },
+  background: await CustomCards.imageBufferAdapter(wpBuf),
+  font: CustomCards.Fonts.Fredoka,
+  text: [
     {
       content: "Bienvenid@ usuario",
       color: "#fff",
@@ -85,34 +61,28 @@ const card = new CustomCards.Welcome()
       content: "Descripción aquí.",
       color: "#eee",
     },
-  ])
-  .setFont(CustomCards.Fonts.Fredoka);
+  ],
+});
+
+const data = await client.cards.createWelcomeCard(card);
+console.log(data);
+/*
+{
+  "mimetype": "image/webp",
+  "card": Buffer<...>
+}
+*/
 ```
 
 #### Ejemplo:
 
-[![img](https://raw.githubusercontent.com/Yumiko0828/custom-cards/main/docs/img1.png)](https://www.npmjs.com/package/custom-cards)
-
-### Función `render`:
-
-El uso de la función `render` (teoría).
-
-> [!NOTE]
-> La función `render` es asíncrona, por lo que tendra que usar _`Promesas`_ o _`async / await`_.
-
-- Ejemplo de uso:
-
-  Cada [tarjeta](#tarjetas) tendrá un método estático que construirá la Tarjeta respectiva. A esta función se le debe pasar la instancia de la tarjeta.
-
-  ```js
-  const buffer = await Welcome.render(card);
-
-  console.log(buffer);
-  ```
+[![img](https://raw.githubusercontent.com/Yumiko0828/custom-cards/main/docs/img1.webp)](https://www.npmjs.com/package/custom-cards)
 
 ## Detalles del proyecto:
 
-- Licencia: **[MIT License](https://github.com/Yumiko0828/custom-cards/blob/main/LICENSE.md)**
+- Licencia: **[MIT License](LICENSE)**
 - Autor: **[Yasu Yumiko](https://discord.com/users/752918867273187378)**
+- [Servidor de Discord](https://discord.gg/YqUkagNPaw)
+- [Documentación oficial](https://custom-cards-web.vercel.app/)
 
 ### Gracias :D

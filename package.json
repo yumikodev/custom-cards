@@ -3,8 +3,7 @@
   "version": "1.6.0",
   "description": "A simple card module with Canvas.",
   "files": [
-    "lib/**/*",
-    "fonts/*"
+    "lib/**/*"
   ],
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -24,7 +23,7 @@
   "bugs": {
     "url": "https://github.com/Yumiko0828/custom-cards/issues"
   },
-  "homepage": "https://github.com/Yumiko0828/custom-cards#readme",
+  "homepage": "https://custom-cards-web.vercel.app/",
   "devDependencies": {
     "typescript": "5.7.2"
   },

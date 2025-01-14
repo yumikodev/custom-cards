@@ -4,6 +4,7 @@ export class ApiErrorResponse {
   statusCode: number;
 }
 
-export class ApiCardResponse {
-  card: ArrayBufferLike;
+export class ApiCardResponse<T extends string | Buffer = string> {
+  card: T;
+  mimetype: string;
 }
